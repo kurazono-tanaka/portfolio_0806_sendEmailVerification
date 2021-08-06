@@ -48,18 +48,18 @@ const actions = {
           console.log(username)
           //メール認証
           const actionCodeSettings = {
-            url: "http://" + location.host + "/completion",
+            url: "http://" + location.host + "/home",
             handleCodeInApp: true
           }
           firebase.auth().languageCode = "ja"
-          firebase.auth().sendSignInLinkToEmail(mailaddress, actionCodeSettings).then(() => {
-            window.localStorage.setItem('emailForSignIn', mailaddress)
+          const currentUser = firebase.auth().currentUser
+          currentUser.sendEmailVerification(actionCodeSettings).then(() => {
             commit('setUserName', username)
             commit('setMailAddress', mailaddress)
             commit('setPassword', password)
             console.log(`メールの送信に成功しました。`)
           }).catch((error) => {
-            console.log(`sendSignInLinkToEmailでエラー発生：${error}`)
+            console.log(`sendEmailVerificationでエラー発生：${error}`)
           })
         }).catch(error => {
           console.log(`currentUser.updateProfileでエラー発生：${error}`)

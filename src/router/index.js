@@ -47,11 +47,15 @@ let router = new Router({
 router.beforeEach((to, from, next) => {
   console.log('toの中身')
   console.log(to)
+  console.log('fromの中身')
+  console.log(from)
+  console.log('from.nameの中身')
+  console.log(from.name)
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   console.log('requiresAuthの中身')
   console.log(requiresAuth)
   // let currentUser = firebase.auth().currentUser
-  if (requiresAuth) {
+  if (requiresAuth && from.name !== 'Completion') {
     // このルートはログインされているかどうか認証が必要です。
     // もしされていないならば、ログインページにリダイレクトします。
     firebase.auth().onAuthStateChanged((user) => {
