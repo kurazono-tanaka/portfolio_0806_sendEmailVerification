@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import PortfolioTop from '@/components/PortfolioTop'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
+import Completion from '@/components/completion'
 import Home from '@/components/home'
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -28,6 +29,11 @@ let router = new Router({
       path: '/signin',
       name: 'Signin',
       component: Signin
+    },
+    {
+      path: '/completion',
+      name: 'Completion',
+      component: Completion
     },
     {
       path: '/home',
